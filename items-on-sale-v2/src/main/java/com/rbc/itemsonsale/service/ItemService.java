@@ -8,6 +8,7 @@ import com.rbc.itemsonsale.entity.Item;
 import com.rbc.itemsonsale.repository.ItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +17,7 @@ public class ItemService {
     @Autowired
     private ItemRepository repo;
 
+    @Cacheable("itemsCache")
     public List<Item> listAll() {
         return repo.findAll();
     }

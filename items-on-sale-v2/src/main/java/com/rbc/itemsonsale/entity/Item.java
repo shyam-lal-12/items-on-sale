@@ -1,18 +1,29 @@
 package com.rbc.itemsonsale.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Item {
+@Table(name="item")
+public class Item implements Serializable{
     
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
     private float price;
-    private String category;
+    private int categoryId;
+    private String categoryName;
     private float userRating;
     private float globalRating;
 
@@ -23,8 +34,15 @@ public class Item {
 
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -57,12 +75,12 @@ public class Item {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public float getUserRating() {
@@ -78,13 +96,14 @@ public class Item {
         this.globalRating = globalRating;
     }
 
-    public Item(int id, String name, String description, float price, String category, float userRating,
+    public Item(int id, String name, String description, float price, int categoryId, String categoryName, float userRating,
             float globalRating) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.userRating = userRating;
         this.globalRating = globalRating;
     }
